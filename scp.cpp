@@ -10,11 +10,11 @@
 #include <chrono>      // time
 #include <cstring>     // strcmp
 
-const unsigned MAGIC_CONST = 3;
+const unsigned TYPE_COUNT = 3;
 
 namespace fs = std::filesystem;
 using VoS = std::vector<std::string>;
-using AoVoS = std::array<VoS, MAGIC_CONST>;
+using AoVoS = std::array<VoS, TYPE_COUNT>;
 
 const std::set<std::string> IMAGE_EXTS = {
     ".jpg", ".jpeg", ".png", ".bmp", ".webp"
@@ -76,9 +76,9 @@ void saveToJson(const AoVoS& files, const std::string& output_file) {
     std::ofstream file(output_file);
     
     file << "{\n";
-    std::array<std::string, MAGIC_CONST> sections = {"videos", "images", "audios"};
+    std::array<std::string, TYPE_COUNT> sections = {"videos", "images", "audios"};
     
-    for(unsigned i = 0; i < MAGIC_CONST; i++) {
+    for(unsigned i = 0; i < TYPE_COUNT; i++) {
         const VoS& items = files[i];
         file << "  \"" << sections[i] << "\": [\n";
         
@@ -91,7 +91,7 @@ void saveToJson(const AoVoS& files, const std::string& output_file) {
         }
         file << "  ]";
         
-        if (i < MAGIC_CONST - 1) {
+        if (i < TYPE_COUNT - 1) {
             file << ",";
         }
         file << "\n";
