@@ -135,13 +135,21 @@ int main(int argc, char* argv[]) {
         std::cout << "[Error] path does not exist: " << dir << "\n";
         return 1;
     }
-    std::cout << dir << "\n" << interval << "\n";
-    return 1;
-    auto media_files = scanDirectory(dir);
-    
-    saveToJson(media_files, "media_files.json");
 
-    std::cout << "Found: " << getSizeOfAovos(media_files) << "\n";
-    
+    if (interval == 0) {
+        auto media_files = scanDirectory(dir);
+        saveToJson(media_files, "media_files.json");
+        std::cout << "Found: " << getSizeOfAovos(media_files) << "\n";
+        return 0;
+    }
+
+    while (true) {
+        auto media_files = scanDirectory(dir);
+        saveToJson(media_files, "media_files.json");
+        std::cout << "Found: " << getSizeOfAovos(media_files) << "\n";
+        
+        std::cout << "Sleep for  " << interval << " seconds..\n";
+        std::this_thread::sleep_for(std::chrono::seconds(interval));
+    }
     return 0;
 }
