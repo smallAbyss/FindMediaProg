@@ -6,6 +6,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -O2")
 
 add_executable(scanner scp.cpp)
-target_link_libraries(scanner stdc++fs) 
-# for fs
 
+target_link_libraries(scanner 
+    stdc++fs        # for std::filesystem
+    pthread         # for std::this_thread::sleep_for
+)
