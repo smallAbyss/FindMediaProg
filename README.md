@@ -6,7 +6,7 @@ Recursive media file scanner for Linux. Finds images, videos, and audio files in
 ## Features
 
 - Recursive directory scanning
-- Detects images (`.jpg`, `.png`, `.bmp`, `.webp`)
+- Detects images (`.jpg`, `.jpeg`, `.png`, `.bmp`, `.webp`)
 - Detects videos (`.mp4`, `.avi`, `.mkv`, `.mov`, `.flv`, `.webm`)
 - Detects audio (`.mp3`, `.wav`, `.flac`, `.ogg`)
 - Outputs grouped JSON
