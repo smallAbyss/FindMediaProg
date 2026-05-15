@@ -1,5 +1,6 @@
 # Media Scanner
 
+## Describtion
 Recursive media file scanner for Linux. Finds images, videos, and audio files in a directory and saves them to a structured JSON file.
 
 ## Features
@@ -37,31 +38,24 @@ g++ -std=c++17 scp.cpp -o scanner -lstdc++fs -pthread
 
 ## Flags
 
-### Periodic scan
-
-```bash
-./build/scanner -t 3600
-```
-
-### Selection of director
-
-```bash
-./build/scanner -d /home 
-```
+- `-t <time>` - rescan every `<time>` seconds;
+- `-d <path>` - scan the specified directory (`.` by default).
 
 ## Output
+The output JSON would be created in the `.` with name `media_files.json` 
 
+`media_files.json (example):`
 ```JSON
 {
   "videos": [
-    "/home/user/Videos/demo.mp4"
+    "/home/user/videos/demo.mp4"
   ],
   "images": [
-    "/home/user/Pictures/photo.jpg",
-    "/home/user/Pictures/icon.png"
+    "/home/user/pictures/photo.jpg",
+    "/home/user/pictures/icon.png"
   ],
   "audios": [
-    "/home/user/Music/song.mp3"
+    "/home/user/music/song.mp3"
   ]
 }
 ```
