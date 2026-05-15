@@ -105,10 +105,10 @@ unsigned getSizeOfAovos(const AoVoS& v) {
     return sum;
 }
 
-int main() {
-    const char* home = std::getenv("HOME");
+int main(int argc, char* argv[]) {
+    std::string dir = (argc > 1) ? argv[1] : std::getenv("HOME");
 
-    auto media_files = scanDirectory(home);
+    auto media_files = scanDirectory(dir);
     
     saveToJson(media_files, "media_files.json");
 
