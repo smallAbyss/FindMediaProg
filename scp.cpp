@@ -5,8 +5,10 @@
 #include <filesystem> 
 #include <algorithm>
 #include <set>
-#include <tuple>
 #include <array>
+#include <thread>      // sleep
+#include <chrono>      // time
+#include <cstring>     // strcmp
 
 const unsigned MAGIC_CONST = 3;
 
@@ -106,11 +108,35 @@ unsigned getSizeOfAovos(const AoVoS& v) {
 }
 
 int main(int argc, char* argv[]) {
-    std::string dir = (argc > 1) ? argv[1] : std::getenv("HOME");
+    unsigned interval = 0;  
+    std::string dir;
+    
+    const char* home = std::getenv("HOME");
+    dir = home ? home : ".";
+    
+    if (argc > 1) {
+        for (int i = 1; i < argc; i++) {
+            if (strcmp(argv[i], "-t") == 0 && i + 1 < argc) {
+                interval = std::stoi(argv[++i]); 
+                continue;
+            }
+            if (strcmp(argv[i], "-d") == 0) {
+                if (i + 1 < argc) {
+                    dir = argv[++i];  
+                }
+                continue;
+            }
+             std::cout << "[Error] Unknown arg"  << "\n";
+            return 1;
+        }
+    }
+
     if (!fs::exists(dir)) {
         std::cout << "[Error] path does not exist: " << dir << "\n";
         return 1;
     }
+    std::cout << dir << "\n" << interval << "\n";
+    return 1;
     auto media_files = scanDirectory(dir);
     
     saveToJson(media_files, "media_files.json");
