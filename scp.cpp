@@ -36,16 +36,12 @@ std::string whichMedia(const std::string& ext) {
 }
 
 bool isMedia(const fs::path& path) {
-     std::string ext = path.extension().string();
-      // std::transform(ext.begin(), ext.end(), ext.begin(), ::tolower);
+    std::string ext = path.extension().string();
+    std::transform(ext.begin(), ext.end(), ext.begin(), ::tolower);
     
-    static const std::set<std::string> extensions = {
-        ".jpg", ".jpeg", ".png", ".gif", ".bmp",   // картинки
-        ".mp4", ".avi", ".mkv", ".mov",            // видео
-        ".mp3", ".wav", ".flac", ".ogg"           // аудио
-    };
-    
-    return extensions.find(ext) != extensions.end();
+    return IMAGE_EXTS.find(ext) != IMAGE_EXTS.end() ||
+           VIDEO_EXTS.find(ext) != VIDEO_EXTS.end() ||
+           AUDIO_EXTS.find(ext) != AUDIO_EXTS.end();
 }
 
 AoVoS scanDirectory(const std::string& path) {
