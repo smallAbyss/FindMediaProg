@@ -107,7 +107,10 @@ unsigned getSizeOfAovos(const AoVoS& v) {
 
 int main(int argc, char* argv[]) {
     std::string dir = (argc > 1) ? argv[1] : std::getenv("HOME");
-
+    if (!fs::exists(dir)) {
+        std::cout << "[Error] path does not exist: " << dir << "\n";
+        return 1;
+    }
     auto media_files = scanDirectory(dir);
     
     saveToJson(media_files, "media_files.json");
